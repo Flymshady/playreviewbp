@@ -1,0 +1,20 @@
+@import model.Item
+@import play.data.Form
+@import helper._
+@(itemForm : Form[Item])
+
+@layout("Vytvořit položku"){
+    <h1>Vytvořit položku</h1>
+    @helper.form(action = routes.ItemsController.save()){
+        @helper.CSRF.formField
+        @helper.inputText(itemForm("id"))
+        @helper.inputText(itemForm("name"))
+        @helper.inputText(itemForm("author"))
+        @helper.inputText(itemForm("type"))
+        @helper.inputText(itemForm("year"))
+        @helper.inputText(itemForm("textShort"))
+        @helper.inputText(itemForm("textLong"))
+
+        <input type="submit" value="Vytvořit">
+    }
+}

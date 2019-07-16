@@ -1,0 +1,13 @@
+@import model.Item
+@(item : Item)
+
+@layout(item.getName){
+    <h1>@item.getName</h1>
+    <a href="@routes.ItemsController.edit(item.getId)">Upravit</a>
+    <p>Id: @item.getId</p>
+    <p>Autor: @item.getAuthor</p>
+    <p>Rok: @item.getYear</p>
+    <p>Typ: @item.getType</p>
+    <p>Popis: @item.getTextShort</p>
+    <p>@item.getTextLong</p>
+}

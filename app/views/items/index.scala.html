@@ -1,0 +1,16 @@
+@(items: Set[model.Item])
+@layout("Všechny položky"){
+    <h1>Všechny položky</h1>
+    <a href="@routes.ItemsController.create()">Vytvořit položku</a>
+    @for(item <- items){
+        <h1>@item.getName</h1>
+        <a href="@routes.ItemsController.detail(item.getId)">Detail</a>
+        <a href="@routes.ItemsController.remove(item.getId)">Odstranit</a>
+        <p>Id: @item.getId</p>
+        <p>Autor: @item.getAuthor</p>
+        <p>Rok: @item.getYear</p>
+        <p>Typ: @item.getType</p>
+        <p>Popis: @item.getTextShort</p>
+        <p>@item.getTextLong</p>
+    }
+}
