@@ -27,7 +27,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: aopalliance:aopalliance:1.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.h2database:h2:1.4.192:jar" level="project" />
     <orderEntry type="library" name="sbt: tyrex:tyrex:1.0.1:jar" level="project" />
     <orderEntry type="library" name="sbt: org.yaml:snakeyaml:1.21:jar" level="project" />
     <orderEntry type="library" name="sbt: org.reflections:reflections:0.9.11:jar" level="project" />
@@ -174,16 +173,6 @@
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-classic:1.2.3:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.play:play-enhancer:1.2.2:jar" level="project" />
     <orderEntry type="library" name="sbt: org.javassist:javassist:3.21.0-GA:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:cachecontrol_2.13:1.1.7:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-ahc-ws-standalone_2.13:2.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-ahc-ws_2.13:2.7.3:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-ws-standalone-json_2.13:2.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-ws-standalone-xml_2.13:2.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-ws-standalone_2.13:2.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:play-ws_2.13:2.7.3:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:shaded-asynchttpclient:2.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.typesafe.play:shaded-oauth:2.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: javax.cache:cache-api:1.0.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.joda:joda-convert:1.9.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.h2database:h2:1.4.192:jar" level="project" />
   </component>
 </module>

@@ -1,9 +1,11 @@
-package model;
+package models;
 
 import io.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +14,13 @@ public class Item extends Model {
 
     @Id
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String author;
+    @NotBlank
     private String type;
+    @NotNull
     private int year;
     private String textShort;
     private String textLong;
