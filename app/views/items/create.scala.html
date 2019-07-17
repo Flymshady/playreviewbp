@@ -4,17 +4,21 @@
 @(itemForm : Form[Item])
 
 @layout("Vytvořit položku"){
-    <h1>Vytvořit položku</h1>
+    <div class="row">
+        <div class="col-lg-auto offset-2 align-content-center" >
+            <h1>Vytvoření nové položky</h1>
     @helper.form(action = routes.ItemsController.save()){
         @helper.CSRF.formField
-        @helper.inputText(itemForm("id"))
         @helper.inputText(itemForm("name"))
         @helper.inputText(itemForm("author"))
-        @helper.inputText(itemForm("type"))
+        @helper.inputText(itemForm("typeFormat"))
         @helper.inputText(itemForm("year"))
+        @helper.inputText(itemForm("genre"))
         @helper.inputText(itemForm("textShort"))
         @helper.inputText(itemForm("textLong"))
 
         <input type="submit" value="Vytvořit">
     }
+        </div>
+    </div>
 }

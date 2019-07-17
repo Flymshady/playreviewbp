@@ -1,16 +1,54 @@
-@(items: Set[models.Item])
+@(items: List[models.Item])
 @layout("Všechny položky"){
+
+    <div style="position: relative">
+        <div class="row">
+            <div class="col-lg-auto offset-2 align-content-center">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn">Všechny</button>
+                    <button type="button" class="btn btn-light">Rock</button>
+                    <button type="button" class="btn btn-light">Pop</button>
+                    <button  type="button" class="btn btn-light">Hip-Hop</button>
+                    <button  type="button" class="btn btn-light">Klasická hudba</button>
+                    <button  type="button" class="btn btn-light">Metal</button>
+                </div>
+
+
     <h1>Všechny položky</h1>
     <a href="@routes.ItemsController.create()">Vytvořit položku</a>
-    @for(item <- items){
-        <h1>@item.getName</h1>
-        <a href="@routes.ItemsController.detail(item.getId)">Detail</a>
-        <a href="@routes.ItemsController.remove(item.getId)">Odstranit</a>
-        <p>Id: @item.getId</p>
-        <p>Autor: @item.getAuthor</p>
-        <p>Rok: @item.getYear</p>
-        <p>Typ: @item.getType</p>
-        <p>Popis: @item.getTextShort</p>
-        <p>@item.getTextLong</p>
-    }
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Položka</th>
+                            <th>Autor</th>
+                            <th>Typ</th>
+                            <th>Žánr</th>
+                            <th>Rok</th>
+                            <th>Popis</th>
+                            <th style="width: 90px"></th>
+                            <th style="width: 90px"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        @for(item <- items){
+                            <td>@item.name <p> @item.id</p></td>
+                            <td>@item.author</td>
+                            <td>@item.typeFormat</td>
+                            <td>@item.genre</td>
+                            <td>@item.year</td>
+                            <td>@item.textShort</td>
+                            <td><a href="@routes.ItemsController.detail(item.id)">Detail</a></td>
+                            <td><a href="@routes.ItemsController.remove(item.id)">Odstranit</a></td>
+                        }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 }

@@ -4,17 +4,23 @@
 @(itemForm : Form[Item])
 
 @layout("Upravit položku"){
-    <h1>Upravit položku</h1>
-    @helper.form(action = routes.ItemsController.update()){
+    <div class="row" style="padding-bottom: 10%;">
+        <div class="col-lg-auto offset-2 align-content-center" >
+            <h1>Úprava položky </h1><a href="#">Zpět na detail</a>
+
+            @helper.form(action = routes.ItemsController.update()){
         @helper.CSRF.formField
         @helper.inputText(itemForm("id"))
         @helper.inputText(itemForm("name"))
         @helper.inputText(itemForm("author"))
-        @helper.inputText(itemForm("type"))
+        @helper.inputText(itemForm("typeFormat"))
         @helper.inputText(itemForm("year"))
+        @helper.inputText(itemForm("genre"))
         @helper.inputText(itemForm("textShort"))
         @helper.inputText(itemForm("textLong"))
 
         <input type="submit" value="Upravit">
     }
+        </div>
+    </div >
 }

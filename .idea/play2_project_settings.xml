@@ -6,6 +6,7 @@
         <entry key="playreview">
           <value>
             <ProjectSettingsEntry>
+              <option name="sourceDir" value="C:\Users\hp\Desktop\bakalarka\playreview-master\app" />
               <option name="confDir" value="C:\Users\hp\Desktop\bakalarka\playreview-master\app" />
               <option name="playDistrPath" value="$USER_HOME$/.ivy2/cache/com.typesafe.play/play_2.13/jars/play_2.13-2.7.3.jar" />
               <option name="templateImports">
@@ -52,7 +53,7 @@
         <entry key="root">
           <value>
             <ProjectSettingsEntry>
-              <option name="confDir" value="C:\Users\hp\Desktop\bakalarka\playreview-master\app" />
+              <option name="sourceDir" value="C:\Users\hp\Desktop\bakalarka\playreview-master\app" />
               <option name="templateImports">
                 <list>
                   <option value="_root_.play.twirl.api.TwirlFeatureImports._" />
