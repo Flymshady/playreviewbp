@@ -5,6 +5,11 @@ import models.Item;
 import play.db.ebean.EbeanConfig;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 
 public class ItemRepository {
@@ -17,6 +22,15 @@ public class ItemRepository {
         this.ebeanServer=Ebean.getServer(ebeanConfig.defaultServer());
         this.executionContext=executionContext;
     }
+
+    public List<Item> getByGenre(String genre){
+        List<Item> items = Ebean.find(Item.class)
+                .where()
+                .eq("genre", genre)
+                .findList();
+        return items;
+    }
+
 
 
 

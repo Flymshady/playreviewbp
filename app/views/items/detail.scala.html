@@ -1,24 +1,24 @@
 @import models.Item
 @(item : Item)
 
-@layout(item.name){
+    @layout(item.name){
 
-    <div class="row">
-        <div class="col-lg-auto offset-2 align-content-center">
-            <a href="@routes.ItemsController.edit(item.id)">Upravit</a>
-            <h1>@item.name</h1>
-            <h2>Autor: @item.author</h2>
-            <p>Id: @item.id</p>
-            <p>Typ: @item.typeFormat</p>
-            <p>Žánr: @item.genre</p>
-            <p>Rok vydání: @item.year</p>
-            <p>Popis:  @item.textShort</p>
-            <div style="max-width: 1000px; position: relative; word-break: break-all;"><span>@item.textLong</span></div>
-            <a href="#">Recenze</a>
+        <div class="row">
+            <div class="col-lg-auto offset-2 align-content-center">
+                <a href="@routes.ItemsController.edit(item.id)">Upravit</a>
+                <h1>@item.name</h1>
+                <h2>Autor: @item.author</h2>
+                <p>Id: @item.id</p>
+                <p>Typ: @item.typeFormat</p>
+                <p>Žánr: @item.genre</p>
+                <p>Rok vydání: @item.year</p>
+                <p>Popis:  @item.textShort</p>
+                <div style="max-width: 1000px; position: relative; word-break: break-all;"><span>@item.textLong</span></div>
+                <a href="#">Recenze</a>
 
+            </div>
         </div>
-    </div>
 
 
 
-}
+    }

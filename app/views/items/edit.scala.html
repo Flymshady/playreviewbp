@@ -9,18 +9,18 @@
             <h1>Úprava položky </h1><a href="#">Zpět na detail</a>
 
             @helper.form(action = routes.ItemsController.update()){
-        @helper.CSRF.formField
-        @helper.inputText(itemForm("id"))
-        @helper.inputText(itemForm("name"))
-        @helper.inputText(itemForm("author"))
-        @helper.inputText(itemForm("typeFormat"))
-        @helper.inputText(itemForm("year"))
-        @helper.inputText(itemForm("genre"))
-        @helper.inputText(itemForm("textShort"))
-        @helper.inputText(itemForm("textLong"))
+                @helper.CSRF.formField
+                @helper.inputText(itemForm("id"))
+                @helper.inputText(itemForm("Název"))
+                @helper.inputText(itemForm("Autor"))
+                @helper.inputText(itemForm("Typ"))
+                @helper.inputText(itemForm("Rok"))
+                @helper.inputText(itemForm("Žánr"))
+                @helper.inputText(itemForm("Popisek"))
+                @helper.textarea(itemForm("Text"))
 
-        <input type="submit" value="Upravit">
-    }
+                <input type="submit" value="Upravit">
+                }
         </div>
     </div >
 }

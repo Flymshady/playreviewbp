@@ -24,8 +24,9 @@ import javax.inject.Inject;
 
 public class ItemsController extends Controller {
 
-    private final ItemRepository itemRepository;
+
     private final FormFactory formFactory;
+    private final ItemRepository itemRepository;
 
 
     @Inject
@@ -44,6 +45,12 @@ public class ItemsController extends Controller {
         return ok(index.render(items));
     }
 
+    public Result getByGenre(String genre){
+        List<Item> items = itemRepository.getByGenre(genre);
+        System.out.println(items);
+       return ok(index.render(items));
+    }
+
     //creating item
     public Result create(){
         Form<Item> itemForm = formFactory.form(Item.class);
@@ -53,6 +60,10 @@ public class ItemsController extends Controller {
 
     public Result save(){
         Form<Item> itemForm = formFactory.form(Item.class).bindFromRequest();
+
+        if(itemForm.hasErrors()){
+            return badRequest(create.render(itemForm));
+        }
         Item item = itemForm.get();
         item.save();
         return  redirect(routes.ItemsController.index());
@@ -70,6 +81,9 @@ public class ItemsController extends Controller {
 
     public Result update(){
         Form<Item> itemForm = formFactory.form(Item.class).bindFromRequest();
+        if(itemForm.hasErrors()){
+            return badRequest(edit.render(itemForm));
+        }
         Item item = itemForm.get();
         Item oldItem = Item.find.byId(item.id);
         if(oldItem == null){

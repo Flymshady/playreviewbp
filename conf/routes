@@ -3,7 +3,7 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
+GET     /                           controllers.ItemsController.index
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -17,8 +17,6 @@ POST        /items/edit             controllers.ItemsController.update()
 POST        /items/create           controllers.ItemsController.save()
 GET         /items/remove/:id       controllers.ItemsController.remove(id: Long)
 
-
-
-
+GET         /items/genre/:genre                  controllers.ItemsController.getByGenre(genre:String)
 
 

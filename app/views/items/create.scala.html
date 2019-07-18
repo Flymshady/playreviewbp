@@ -3,22 +3,22 @@
 @import helper._
 @(itemForm : Form[Item])
 
-@layout("Vytvořit položku"){
-    <div class="row">
-        <div class="col-lg-auto offset-2 align-content-center" >
-            <h1>Vytvoření nové položky</h1>
-    @helper.form(action = routes.ItemsController.save()){
-        @helper.CSRF.formField
-        @helper.inputText(itemForm("name"))
-        @helper.inputText(itemForm("author"))
-        @helper.inputText(itemForm("typeFormat"))
-        @helper.inputText(itemForm("year"))
-        @helper.inputText(itemForm("genre"))
-        @helper.inputText(itemForm("textShort"))
-        @helper.inputText(itemForm("textLong"))
+    @layout("Vytvořit položku"){
+        <div class="row" style="padding-bottom: 10%;">
+            <div class="col-lg-auto offset-2 align-content-center" >
+                <h1>Vytvoření nové položky</h1>
+                @helper.form(action = routes.ItemsController.save()){
+                    @helper.CSRF.formField
+                    @helper.inputText(itemForm("Název"))
+                    @helper.inputText(itemForm("Autor"))
+                    @helper.inputText(itemForm("Typ"))
+                    @helper.inputText(itemForm("Rok"))
+                    @helper.inputText(itemForm("Žánr"))
+                    @helper.inputText(itemForm("Popisek"))
+                    @helper.textarea(itemForm("Text"))
 
-        <input type="submit" value="Vytvořit">
-    }
+                    <input type="submit" value="Vytvořit">
+                    }
+            </div>
         </div>
-    </div>
-}
+    }

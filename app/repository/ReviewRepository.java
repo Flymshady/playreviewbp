@@ -1,0 +1,20 @@
+package repository;
+
+import io.ebean.Ebean;
+import io.ebean.EbeanServer;
+import play.db.ebean.EbeanConfig;
+
+import javax.inject.Inject;
+
+public class ReviewRepository {
+
+    private final EbeanServer ebeanServer;
+    private final DatabaseExecutionContext executionContext;
+
+    @Inject
+    public ReviewRepository(EbeanConfig ebeanConfig, DatabaseExecutionContext executionContext){
+        this.ebeanServer= Ebean.getServer(ebeanConfig.defaultServer());
+        this.executionContext=executionContext;
+    }
+
+}
