@@ -3,7 +3,15 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.ItemsController.index
+GET     /                           controllers.HomeController.index
+
+
+GET     /oidc/index.html            controllers.HomeController.oidcIndex()
+GET     /protected/index.html       controllers.HomeController.protectedIndex()
+GET     /callback                   @org.pac4j.play.CallbackController.callback()
+POST    /callback                   @org.pac4j.play.CallbackController.callback()
+GET     /logout                     @org.pac4j.play.LogoutController.logout()
+GET     /centralLogout              controllers.CentralLogoutController.logout()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
