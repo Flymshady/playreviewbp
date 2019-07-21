@@ -13,6 +13,7 @@ import org.pac4j.oidc.config.OidcConfiguration;
 import org.pac4j.play.CallbackController;
 import org.pac4j.play.LogoutController;
 import org.pac4j.play.deadbolt2.Pac4jRoleHandler;
+import org.pac4j.play.scala.Pac4jScalaTemplateHelper;
 import org.pac4j.play.store.PlayCacheSessionStore;
 import org.pac4j.play.store.PlaySessionStore;
 import play.Environment;
@@ -35,9 +36,12 @@ public class SecurityModule extends AbstractModule {
     @Override
     protected void configure() {
 
+
         bind(Pac4jRoleHandler.class).to(MyPac4jRoleHandler.class);
         final PlayCacheSessionStore playCacheSessionStore = new PlayCacheSessionStore(getProvider(SyncCacheApi.class));
         bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);
+
+        bind(Pac4jScalaTemplateHelper.class);
 
         //callback
         final CallbackController callbackController = new CallbackController();

@@ -1,5 +1,27 @@
-@(items: List[models.Item])
-    @layout("Všechny položky"){
+@import org.pac4j.play.scala.Pac4jScalaTemplateHelper
+@import org.pac4j.core.profile.CommonProfile
+
+@(items: List[models.Item])(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
+
+@layout("Všechny položky"){
+        <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
+            <nav class="navbar navbar-light">
+                <div class="container-fluid">
+                    <div class="navbar-brand">
+                        <a class="navbar-brand" href="/">Review App</a>
+                        <span><a class="navbar-brand" href="/admin">Admin</a></span>
+                        <span><a class="navbar-brand" href="#">Přihlásit</a></span>
+                        <span><a class="navbar-brand" href="#">Registrovat</a></span>
+                        <span><a class="navbar-brand" href="/logout">Odhlásit</a></span>
+                        <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
+                        <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">Central logout</a>
+                    </div>
+                    @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                        <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>
+                    }
+                </div>
+            </nav>
+        </header>
 
         <div style="position: relative">
             <div class="row">
@@ -15,8 +37,6 @@
 
 
                     <h1>Všechny položky</h1>
-                    <a href="@routes.ItemsController.create()">Vytvořit položku</a>
-
                     <table class="table">
                         <thead>
                             <tr>
@@ -27,8 +47,6 @@
                                 <th>Rok</th>
                                 <th>Popis</th>
                                 <th style="width: 90px"></th>
-                                <th style="width: 90px"></th>
-
                             </tr>
                         </thead>
 
@@ -36,15 +54,14 @@
                             @for(item <- items){
                                 <tbody>
                                     <tr>
-                                <td>@item.name <p> @item.id</p></td>
+                                <td>@item.name </td>
                                 <td>@item.author</td>
                                 <td>@item.typeFormat</td>
                                 <td>@item.genre</td>
                                 <td>@item.year</td>
                                 <td>@item.textShort</td>
                                 <td><a href="@routes.ItemsController.detail(item.id)">Detail</a></td>
-                                <td><a href="@routes.ItemsController.remove(item.id)">Odstranit</a></td>
-                            }
+                                        }
                             </tr>
                         </tbody>
                     </table>

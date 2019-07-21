@@ -1,13 +1,11 @@
 @import models.Item
-@import play.data.Form
-@import helper._
 @import org.pac4j.play.scala.Pac4jScalaTemplateHelper
 @import org.pac4j.core.profile.CommonProfile
 
-@(itemForm : Form[Item])(id: Long)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
+@(item : Item)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
 
 
-@layout("Upravit položku"){
+@layout(item.name){
     <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
         <nav class="navbar navbar-light">
             <div class="container-fluid">
@@ -23,26 +21,27 @@
                 @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
                     <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>
                 }
+
             </div>
         </nav>
     </header>
-    <div class="row" style="padding-bottom: 10%;">
-        <div class="col-lg-auto offset-2 align-content-center" >
-            <h1>Úprava položky </h1><a href="@routes.ItemsController.adminDetail(id)">Zpět na detail</a>
 
-            @helper.form(action = routes.ItemsController.update(id)){
-                @helper.CSRF.formField
-                @helper.inputText(itemForm("id"))
-                @helper.inputText(itemForm("name"))
-                @helper.inputText(itemForm("author"))
-                @helper.inputText(itemForm("typeFormat"))
-                @helper.inputText(itemForm("year"))
-                @helper.inputText(itemForm("genre"))
-                @helper.inputText(itemForm("textShort"))
-                @helper.textarea(itemForm("textLong"))
+    <div class="row">
+        <div class="col-lg-auto offset-2 align-content-center">
+            <a href="@routes.ItemsController.edit(item.id)">Upravit</a>
+            <h1>@item.name</h1>
+            <h2>Autor: @item.author</h2>
+            <p>Id: @item.id</p>
+            <p>Typ: @item.typeFormat</p>
+            <p>Žánr: @item.genre</p>
+            <p>Rok vydání: @item.year</p>
+            <p>Popis:  @item.textShort</p>
+            <div style="max-width: 1000px; position: relative; word-break: break-all;"><span>@item.textLong</span></div>
+            <a href="#">Recenze</a>
 
-                <input type="submit" value="Upravit">
-                }
         </div>
-    </div >
+    </div>
+
+
+
 }

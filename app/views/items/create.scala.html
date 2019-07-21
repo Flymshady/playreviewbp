@@ -1,21 +1,43 @@
 @import models.Item
 @import play.data.Form
 @import helper._
-@(itemForm : Form[Item])
+@import org.pac4j.play.scala.Pac4jScalaTemplateHelper
+@import org.pac4j.core.profile.CommonProfile
 
-    @layout("Vytvořit položku"){
+@(itemForm : Form[Item])(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
+
+
+@layout("Vytvořit položku"){
+        <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
+            <nav class="navbar navbar-light">
+                <div class="container-fluid">
+                    <div class="navbar-brand">
+                        <a class="navbar-brand" href="/">Review App</a>
+                        <span><a class="navbar-brand" href="/admin">Admin</a></span>
+                        <span><a class="navbar-brand" href="#">Přihlásit</a></span>
+                        <span><a class="navbar-brand" href="#">Registrovat</a></span>
+                        <span><a class="navbar-brand" href="/logout">Odhlásit</a></span>
+                        <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
+                        <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">Central logout</a>
+                    </div>
+                    @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                        <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>
+                    }
+                </div>
+            </nav>
+        </header>
         <div class="row" style="padding-bottom: 10%;">
             <div class="col-lg-auto offset-2 align-content-center" >
                 <h1>Vytvoření nové položky</h1>
                 @helper.form(action = routes.ItemsController.save()){
                     @helper.CSRF.formField
-                    @helper.inputText(itemForm("Název"))
-                    @helper.inputText(itemForm("Autor"))
-                    @helper.inputText(itemForm("Typ"))
-                    @helper.inputText(itemForm("Rok"))
-                    @helper.inputText(itemForm("Žánr"))
-                    @helper.inputText(itemForm("Popisek"))
-                    @helper.textarea(itemForm("Text"))
+                    @helper.inputText(itemForm("name"))
+                    @helper.inputText(itemForm("author"))
+                    @helper.inputText(itemForm("typeFormat"))
+                    @helper.inputText(itemForm("year"))
+                    @helper.inputText(itemForm("genre"))
+                    @helper.inputText(itemForm("textShort"))
+                    @helper.textarea(itemForm("textLong"))
 
                     <input type="submit" value="Vytvořit">
                     }

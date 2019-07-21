@@ -17,14 +17,18 @@ GET     /centralLogout              controllers.CentralLogoutController.logout()
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 
-GET         /items                  controllers.ItemsController.index
-GET         /items/create           controllers.ItemsController.create()
-GET         /items/:id              controllers.ItemsController.detail(id: Long)
-GET         /items/edit/:id         controllers.ItemsController.edit(id: Long)
-POST        /items/edit             controllers.ItemsController.update()
-POST        /items/create           controllers.ItemsController.save()
-GET         /items/remove/:id       controllers.ItemsController.remove(id: Long)
+GET         /items                        controllers.ItemsController.index
+GET         /admin                        controllers.ItemsController.adminIndex
+GET         /admin/items                  controllers.ItemsController.adminIndex
+GET         /admin/items/create           controllers.ItemsController.create()
+GET         /items/:id                    controllers.ItemsController.detail(id: Long)
+GET         /admin/items/:id              controllers.ItemsController.adminDetail(id: Long)
+GET         /admin/items/edit/:id         controllers.ItemsController.edit(id: Long)
+POST        /admin/items/edit             controllers.ItemsController.update(id: Long)
+POST        /admin/items/create           controllers.ItemsController.save()
+GET         /admin/items/remove/:id       controllers.ItemsController.remove(id: Long)
 
 GET         /items/genre/:genre                  controllers.ItemsController.getByGenre(genre:String)
+GET         /admin/items/genre/:genre            controllers.ItemsController.adminGetByGenre(genre:String)
 
 

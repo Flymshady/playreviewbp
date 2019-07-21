@@ -1,11 +1,31 @@
 @import models.Item
-@(item : Item)
+@import org.pac4j.play.scala.Pac4jScalaTemplateHelper
+@import org.pac4j.core.profile.CommonProfile
+
+    @(item : Item)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
+
 
     @layout(item.name){
+        <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
+            <nav class="navbar navbar-light">
+                <div class="container-fluid">
+                    <div class="navbar-brand">
+                        <a class="navbar-brand" href="/">Review App</a>
+                        <span><a class="navbar-brand" href="#">Přihlásit</a></span>
+                        <span><a class="navbar-brand" href="#">Registrovat</a></span>
+                        <span><a class="navbar-brand" href="/logout">Odhlásit</a></span>
+                        <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
+                        <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">Central logout</a>
+                    </div>
+                    @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                        <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>
+                    }
+                </div>
+            </nav>
+        </header>
 
         <div class="row">
             <div class="col-lg-auto offset-2 align-content-center">
-                <a href="@routes.ItemsController.edit(item.id)">Upravit</a>
                 <h1>@item.name</h1>
                 <h2>Autor: @item.author</h2>
                 <p>Id: @item.id</p>
