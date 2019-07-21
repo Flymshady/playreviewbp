@@ -21,3 +21,4 @@ libraryDependencies += "org.glassfish.jaxb" % "jaxb-runtime" % "2.3.2"
 libraryDependencies += "org.pac4j" % "play-pac4j_2.12" % "8.0.0"
 libraryDependencies += "org.pac4j" % "pac4j-oidc" % "3.7.0" exclude("commons-io" , "commons-io")
 libraryDependencies +=  "commons-io" % "commons-io" % "2.4"
+libraryDependencies += "org.pac4j" % "pac4j-http" % "3.7.0"

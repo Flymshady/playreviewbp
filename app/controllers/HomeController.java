@@ -28,7 +28,7 @@ public class HomeController extends Controller {
         return ok(views.html.index.render());
     }
 
-    @Secure(clients = "OidcClient")
+    @Secure(clients = "OidcClient")//, authorizers = "admin")
     public Result oidcIndex() { return protectedIndexView(); }
 
     @Secure
