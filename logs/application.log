@@ -2898,3 +2898,66 @@ play.sbt.PlayExceptions$CompilationException: Compilation error[value oidcIndex 
     play.filters.hosts.AllowedHostsFilter
 
 2019-07-23 00:04:58,331 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-71 - Application started (Dev) (no global state)
+2019-07-23 00:09:11,687 [INFO] from application in application-akka.actor.default-dispatcher-11 - Shutting down connection pool.
+2019-07-23 00:09:12,758 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-87 - Database [default] initialized at jdbc:h2:tcp://localhost/~/playreviews
+2019-07-23 00:09:12,758 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-87 - Creating Pool for datasource 'default'
+2019-07-23 00:09:12,983 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-87 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-07-23 00:09:12,985 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-87 - Application started (Dev) (no global state)
+2019-07-23 00:15:54,351 [INFO] from application in application-akka.actor.default-dispatcher-6 - Shutting down connection pool.
+2019-07-23 00:15:55,017 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-88 - Database [default] initialized at jdbc:h2:tcp://localhost/~/playreviews
+2019-07-23 00:15:55,017 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-88 - Creating Pool for datasource 'default'
+2019-07-23 00:15:55,583 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-88 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-07-23 00:15:55,585 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-88 - Application started (Dev) (no global state)
+2019-07-23 00:19:31,391 [INFO] from application in application-akka.actor.default-dispatcher-4 - Shutting down connection pool.
+2019-07-23 00:19:31,878 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-93 - Database [default] initialized at jdbc:h2:tcp://localhost/~/playreviews
+2019-07-23 00:19:31,880 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-93 - Creating Pool for datasource 'default'
+2019-07-23 00:19:32,857 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-93 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-07-23 00:19:32,858 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-93 - Application started (Dev) (no global state)
+2019-07-23 00:20:38,293 [INFO] from application in application-akka.actor.default-dispatcher-7 - Shutting down connection pool.
+2019-07-23 00:20:39,011 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-103 - Database [default] initialized at jdbc:h2:tcp://localhost/~/playreviews
+2019-07-23 00:20:39,012 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-103 - Creating Pool for datasource 'default'
+2019-07-23 00:20:39,628 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-103 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-07-23 00:20:39,630 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-103 - Application started (Dev) (no global state)
+2019-07-23 00:20:52,711 [WARN] from org.pac4j.oidc.profile.creator.TokenValidator in application-akka.actor.default-dispatcher-2 - Preferred JWS algorithm: null not available. Using all metadata algorithms: [RS256]
+2019-07-23 00:25:30,738 [INFO] from application in application-akka.actor.default-dispatcher-9 - Shutting down connection pool.
+2019-07-23 00:25:31,150 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-93 - Database [default] initialized at jdbc:h2:tcp://localhost/~/playreviews
+2019-07-23 00:25:31,151 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-93 - Creating Pool for datasource 'default'
+2019-07-23 00:25:31,917 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-93 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-07-23 00:25:31,919 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-93 - Application started (Dev) (no global state)
+2019-07-23 00:28:22,645 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2019-07-23 00:28:23,148 [INFO] from play.api.db.DefaultDBApi in play-dev-mode-akka.actor.default-dispatcher-119 - Database [default] initialized at jdbc:h2:tcp://localhost/~/playreviews
+2019-07-23 00:28:23,148 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-119 - Creating Pool for datasource 'default'
+2019-07-23 00:28:23,873 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-119 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2019-07-23 00:28:23,876 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-119 - Application started (Dev) (no global state)
+2019-07-23 00:29:08,811 [INFO] from play.core.server.AkkaHttpServer in pool-20-thread-6 - Stopping server...
+2019-07-23 00:29:08,825 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.

@@ -4,11 +4,11 @@
 @(items: List[models.Item])(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
 
 @layout(title="Všechny položky"){
-    <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
+    <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #92d13d;">
         <nav class="navbar navbar-light">
             <div class="container-fluid">
                 <div class="navbar-brand">
-                    <a class="navbar-brand" href="/">Review App</a>
+                    <a class="navbar-brand" href="/">Review App - Play</a>
                     @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
                         @if(pac4jScalaTemplateHelper.getCurrentProfile.get.getRoles.contains("ROLE_ADMIN")) {
                             <span><a class="navbar-brand" href="/admin">Admin</a></span>
