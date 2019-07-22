@@ -9,12 +9,17 @@
                 <div class="container-fluid">
                     <div class="navbar-brand">
                         <a class="navbar-brand" href="/">Review App</a>
-                        <span><a class="navbar-brand" href="/admin">Admin</a></span>
-                        <span><a class="navbar-brand" href="#">Přihlásit</a></span>
-                        <span><a class="navbar-brand" href="#">Registrovat</a></span>
-                        <span><a class="navbar-brand" href="/logout">Odhlásit</a></span>
-                        <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
-                        <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">Central logout</a>
+                        @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                            @if(pac4jScalaTemplateHelper.getCurrentProfile.get.getRoles.contains("ROLE_ADMIN")) {
+                                <span><a class="navbar-brand" href="/admin">Admin</a></span>
+                            }
+                            <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
+                            <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">
+                                Central logout</a>
+                        }else{
+                            <span><a class="navbar-brand" href="/login">Přihlásit/Registrovat</a></span>
+                        }
+
                     </div>
                     @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
                         <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>

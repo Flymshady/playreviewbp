@@ -3,40 +3,56 @@
 
 @(reviews: List[models.Review])(itemId: Long)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
 
-@layout("Všechny položky"){
-    <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
-        <nav class="navbar navbar-light">
-            <div class="container-fluid">
-                <div class="navbar-brand">
-                    <a class="navbar-brand" href="/">Review App</a>
-                    <span><a class="navbar-brand" href="/admin">Admin</a></span>
-                    <span><a class="navbar-brand" href="#">Přihlásit</a></span>
-                    <span><a class="navbar-brand" href="#">Registrovat</a></span>
-                    <span><a class="navbar-brand" href="/logout">Odhlásit</a></span>
-                    <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
-                    <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">Central logout</a>
+    @layout("Recenze"){
+        <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
+            <nav class="navbar navbar-light">
+                <div class="container-fluid">
+                    <div class="navbar-brand">
+                        <a class="navbar-brand" href="/">Review App</a>
+                        @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                            @if(pac4jScalaTemplateHelper.getCurrentProfile.get.getRoles.contains("ROLE_ADMIN")) {
+                                <span><a class="navbar-brand" href="/admin">Admin</a></span>
+                            }
+                            <a href="/logout?url=/?forcepostlogouturl">Local logout</a>
+                            <a href="/centralLogout?url=http://localhost:9000/?forcepostlogouturlafteridp">
+                                Central logout</a>
+                        }else{
+                            <span><a class="navbar-brand" href="/login">Přihlásit/Registrovat</a></span>
+                        }
+
+                    </div>
+                    @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                        <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>
+                    }
                 </div>
-                @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
-                    <p  class="navbar-text"  style="margin-right: 10px;">Signed in as <span>@pac4jScalaTemplateHelper.getCurrentProfile.get.getUsername</span></p>
-                }
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <div style="position: relative">
-        <div class="row">
-            <div class="col-lg-auto offset-2 align-content-center">
-                <h1>Recenze</h1>
-                <a href="@routes.ItemsController.detail(itemId)">Zpět</a>
-                <a href="@routes.ReviewController.create(itemId)">Vytvořit recenzi</a>
-                @for(review <- reviews){
-                    <h3>@review.textShort</h3>
-                    <p>@review.personEmail</p>
-                    <p>@review.textLong</p>
-                }
+        <div style="position: relative">
+            <div class="row">
+                <div class="col-lg-auto offset-2 align-content-center">
+                    <h1>Recenze</h1>
+                    <a href="@routes.ItemsController.detail(itemId)">Zpět</a>
+                    <a href="@routes.ReviewController.create(itemId)">Vytvořit recenzi</a>
+                    @for(review <- reviews){
+                        <h3>@review.textShort</h3>
+                        <p>@review.personEmail</p>
+                        <p>@review.textLong</p>
+                        @if(pac4jScalaTemplateHelper.getCurrentProfile.isDefined) {
+                            @if(review.personId.equals(pac4jScalaTemplateHelper.getCurrentProfile.get.getId)) {
+                                <a href="@routes.ReviewController.edit(itemId, review.id)">Upravit recenzi</a>
+                            }
+                            @if(review.personId.equals(pac4jScalaTemplateHelper.getCurrentProfile.get.getId) ||
+                                    pac4jScalaTemplateHelper.getCurrentProfile.get.getRoles.contains("ROLE_ADMIN")){
+                                <a href="@routes.ReviewController.remove(itemId, review.id)">Odstranit recenzi</a>
+                            }
+                        }
 
+
+                    }
+
+                </div>
             </div>
         </div>
-    </div>
 
-}
+    }

@@ -126,6 +126,28 @@ public class ReviewController extends Controller {
         return redirect(routes.ReviewController.index(itemId));
     }
 
+    @Transactional
+    @Secure(clients = "OidcClient")
+    public Result remove(Long itemId, Long id){
+        if(Item.find.byId(itemId)==null){
+            return notFound("Item Not Found "+itemId);
+        }
+        Review review = Review.find.byId(id);
+        if(review==null){
+            return notFound("Review Not Found "+review.id);
+        }
+        if(!Item.find.byId(itemId).equals(Item.find.byId(review.item.id))){
+            return notFound("Item Not Found: "+itemId+"/"+review.item.id);
+        }
+        if(!getUserProfile().get().getRoles().contains("ROLE_ADMIN")){
+            if(!review.personId.equals(getUserProfile().get().getId())){
+                return forbidden("Forbidden access");
+            }
+        }
+        review.delete();
+        return  redirect(routes.ReviewController.index(review.item.id));
+    }
+
 
     private Optional<CommonProfile> getUserProfile() {
         PlayWebContext context = new PlayWebContext(ctx(), playSessionStore);

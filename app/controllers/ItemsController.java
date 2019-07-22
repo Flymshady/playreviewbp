@@ -3,6 +3,7 @@ package controllers;
 
 import io.ebean.annotation.Transactional;
 import models.Item;
+import models.Review;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.play.PlayWebContext;
@@ -14,6 +15,7 @@ import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
 import repository.ItemRepository;
+import repository.ReviewRepository;
 import views.html.items.*;
 
 import javax.inject.Inject;
@@ -26,12 +28,14 @@ public class ItemsController extends Controller {
 
     private final FormFactory formFactory;
     private final ItemRepository itemRepository;
+    private final ReviewRepository reviewRepository;
 
 
     @Inject
-    public ItemsController(FormFactory formFactory, ItemRepository itemRepository){
+    public ItemsController(FormFactory formFactory, ItemRepository itemRepository, ReviewRepository reviewRepository){
         this.formFactory=formFactory;
         this.itemRepository=itemRepository;
+        this.reviewRepository=reviewRepository;
 
     }
 
@@ -116,6 +120,11 @@ public class ItemsController extends Controller {
         Item item = Item.find.byId(id);
         if(item==null){
             return notFound("Item Not Found "+item.id);
+        }
+        if(!reviewRepository.findByItemId(id).isEmpty()){
+            for(Review review : reviewRepository.findByItemId(id)){
+                review.delete();
+            }
         }
         item.delete();
         return  redirect(routes.ItemsController.adminIndex());

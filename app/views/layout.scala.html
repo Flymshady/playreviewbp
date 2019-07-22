@@ -2,12 +2,13 @@
 @(title : String)(body : Html)
 <html lang="cs">
     <head>
+
         <meta charset="UTF-8">
         <meta name="viewport"
         content="width=device-width, person-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")"/>
-
+        <link rel="icon" href="../../public/images/favicon.png"/>
         <title>@title</title>
     </head>
     <body>
@@ -17,8 +18,13 @@
 
     <footer class="blockquote-footer" style="position: fixed; margin-top: 10%; left: 0; bottom: 0; width: 100%; background-color: #5a6268;">
         <div class="container">
-            <p class="text-muted">Page was rendered today.</p>
+            <p>Projekt slouží pro bakalářskou práci - Štěpán Cellar 2019</p>
+            <p class="text-muted">Page was rendered <span id="date"></span></p>
         </div>
     </footer>
+    <script language="javascript">
+     var today = new Date().toLocaleString();
+     document.getElementById('date').innerHTML=today;
+ </script>
     </body>
 </html>
