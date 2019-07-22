@@ -28,7 +28,14 @@ POST        /admin/items/edit             controllers.ItemsController.update(id:
 POST        /admin/items/create           controllers.ItemsController.save()
 GET         /admin/items/remove/:id       controllers.ItemsController.remove(id: Long)
 
-GET         /items/genre/:genre                  controllers.ItemsController.getByGenre(genre:String)
-GET         /admin/items/genre/:genre            controllers.ItemsController.adminGetByGenre(genre:String)
+GET         /items/genre/:genre           controllers.ItemsController.getByGenre(genre:String)
+GET         /admin/items/genre/:genre     controllers.ItemsController.adminGetByGenre(genre:String)
 
+
+#reviews
+GET     /items/:itemId/reviews           controllers.ReviewController.index(itemId: Long)
+GET     /items/:itemId/reviews/create    controllers.ReviewController.create(itemId : Long)
+POST    /items/:itemId/reviews/create    controllers.ReviewController.save(itemId : Long)
+GET     /items/:itemId/reviews/edit/:id  controllers.ReviewController.edit(itemId: Long, id: Long)
+POST    /items/:itemId/reviews/edit/:id  controllers.ReviewController.update(itemId: Long, id: Long)
 

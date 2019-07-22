@@ -16,8 +16,8 @@ public class Review extends Model {
     public String textShort;
     @Constraints.Required
     public String textLong;
-    @ManyToOne
-    public Person person;
+    public String personEmail;
+    public String personId;
     @ManyToOne
     public Item item;
 

@@ -95,9 +95,9 @@ public class ItemsController extends Controller {
             return badRequest(edit.render(itemForm,id, pac4jScalaTemplateHelper));
         }
         Item item = itemForm.get();
-        Item oldItem = Item.find.byId(item.id);
+        Item oldItem = Item.find.byId(id);
         if(oldItem == null){
-            return notFound("Item Not Found "+item.id);
+            return notFound("Item Not Found "+id);
         }
         oldItem.name=item.name;
         oldItem.author=item.author;

@@ -1,13 +1,9 @@
-@import models.Item
-@import play.data.Form
-@import helper._
 @import org.pac4j.play.scala.Pac4jScalaTemplateHelper
 @import org.pac4j.core.profile.CommonProfile
 
-@(itemForm : Form[Item])(id: Long)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
+@(reviews: List[models.Review])(itemId: Long)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
 
-
-@layout("Upravit položku"){
+@layout("Všechny položky"){
     <header style="position: relative; left: 0; top: 0; width: 100%; background-color: #5a6268;">
         <nav class="navbar navbar-light">
             <div class="container-fluid">
@@ -26,22 +22,24 @@
             </div>
         </nav>
     </header>
-    <div class="row" style="padding-bottom: 10%;">
-        <div class="col-lg-auto offset-2 align-content-center" >
-            <h1>Úprava položky </h1><a href="@routes.ItemsController.adminDetail(id)">Zpět na detail</a>
 
-            @helper.form(action = routes.ItemsController.update(id)){
-                @helper.CSRF.formField
-                @helper.inputText(itemForm("name"))
-                @helper.inputText(itemForm("author"))
-                @helper.inputText(itemForm("typeFormat"))
-                @helper.inputText(itemForm("year"))
-                @helper.inputText(itemForm("genre"))
-                @helper.inputText(itemForm("textShort"))
-                @helper.textarea(itemForm("textLong"))
+    <div style="position: relative">
+        <div class="row">
+            <div class="col-lg-auto offset-2 align-content-center">
+                <h1>Recenze</h1>
+                <a href="@routes.ItemsController.detail(itemId)">Zpět</a>
+                <a href="@routes.ReviewController.create(itemId)">Vytvořit recenzi</a>
+                    @for(review <- reviews){
+                        <h3>@review.textShort</h3>
+                        <p>@review.personEmail</p>
+                        <p>@review.textLong</p>
 
-                <input type="submit" value="Upravit">
-                }
+                            <a href="@routes.ReviewController.edit(itemId, review.id)">Upravit recenzi</a>
+
+                    }
+
+            </div>
         </div>
-    </div >
+    </div>
+
 }

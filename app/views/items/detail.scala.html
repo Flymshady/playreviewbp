@@ -34,7 +34,7 @@
                 <p>Rok vydání: @item.year</p>
                 <p>Popis:  @item.textShort</p>
                 <div style="max-width: 1000px; position: relative; word-break: break-all;"><span>@item.textLong</span></div>
-                <a href="#">Recenze</a>
+                <a href="@routes.ReviewController.index(item.id)">Recenze</a>
 
             </div>
         </div>

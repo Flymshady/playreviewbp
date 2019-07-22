@@ -1,10 +1,10 @@
-@import models.Item
+@import models.Review
 @import play.data.Form
 @import helper._
 @import org.pac4j.play.scala.Pac4jScalaTemplateHelper
 @import org.pac4j.core.profile.CommonProfile
 
-@(itemForm : Form[Item])(id: Long)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
+@(reviewForm : Form[Review])(id: Long)(itemId: Long)(implicit pac4jScalaTemplateHelper: Pac4jScalaTemplateHelper[CommonProfile])
 
 
 @layout("Upravit položku"){
@@ -28,17 +28,13 @@
     </header>
     <div class="row" style="padding-bottom: 10%;">
         <div class="col-lg-auto offset-2 align-content-center" >
-            <h1>Úprava položky </h1><a href="@routes.ItemsController.adminDetail(id)">Zpět na detail</a>
+            <h1>Úprava recenze </h1><a href="@routes.ReviewController.index(itemId)">Zpět na recenze</a>
 
-            @helper.form(action = routes.ItemsController.update(id)){
+            @helper.form(action = routes.ReviewController.update(itemId,id)){
                 @helper.CSRF.formField
-                @helper.inputText(itemForm("name"))
-                @helper.inputText(itemForm("author"))
-                @helper.inputText(itemForm("typeFormat"))
-                @helper.inputText(itemForm("year"))
-                @helper.inputText(itemForm("genre"))
-                @helper.inputText(itemForm("textShort"))
-                @helper.textarea(itemForm("textLong"))
+
+                @helper.inputText(reviewForm("textShort"))
+                @helper.textarea(reviewForm("textLong"))
 
                 <input type="submit" value="Upravit">
                 }
