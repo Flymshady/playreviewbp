@@ -5,6 +5,9 @@ import org.pac4j.play.PlayWebContext;
 import org.pac4j.play.http.DefaultHttpActionAdapter;
 import play.mvc.Result;
 import static play.mvc.Results.*;
+
+//Výpis 39
+//Třída pro zpracování výjimek
 public class SecureHttpActionAdapter extends DefaultHttpActionAdapter {
     @Override
     public Result adapt(int code, PlayWebContext context) {

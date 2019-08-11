@@ -3,6 +3,7 @@ package controllers;
 import io.ebean.annotation.Transactional;
 import models.Item;
 import models.Review;
+import org.pac4j.core.context.HttpConstants;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.play.PlayWebContext;
@@ -13,6 +14,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+import repository.DatabaseExecutionContext;
 import repository.ReviewRepository;
 import views.html.reviews.adminIndex;
 import views.html.reviews.create;
@@ -27,11 +29,13 @@ public class ReviewController extends Controller {
 
     private final ReviewRepository reviewRepository;
     private final FormFactory formFactory;
+    private DatabaseExecutionContext databaseExecutionContext;
 
     @Inject
-    public ReviewController(ReviewRepository reviewRepository, FormFactory formFactory){
+    public ReviewController(ReviewRepository reviewRepository, FormFactory formFactory, DatabaseExecutionContext databaseExecutionContext){
         this.reviewRepository=reviewRepository;
         this.formFactory=formFactory;
+        this.databaseExecutionContext=databaseExecutionContext;
     }
 
     @com.google.inject.Inject
@@ -76,15 +80,13 @@ public class ReviewController extends Controller {
     @Secure(clients = "OidcClient")
     public Result edit(Long itemId, Long id){
         if(Item.find.byId(itemId)==null){
-            return notFound("Item Not Found");
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         Review review = Review.find.byId(id);
 
         if(review==null){
-            return notFound("Review Not Found");
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
-        System.out.println(review.personId);
-        System.out.println(getUserProfile().get().getId());
         if(!review.personId.equals(getUserProfile().get().getId())){
             return forbidden("Forbidden access");
         }
@@ -108,17 +110,18 @@ public class ReviewController extends Controller {
         oldReview.personEmail=tmp.personEmail;
         oldReview.item=tmp.item;
         if(oldReview == null){
-            return notFound("Item Not Found "+review.id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         if(!oldReview.personId.equals(getUserProfile().get().getId())){
             return forbidden("Forbidden access");
         }
-        if(!Item.find.byId(itemId).equals(Item.find.byId(oldReview.item.id))){
-            return notFound("Item Not Found: "+itemId+"/"+oldReview.item.id);
-        }
         if(Item.find.byId(itemId)==null){
-            return notFound("Item Not Found");
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
+        if(!Item.find.byId(itemId).equals(Item.find.byId(oldReview.item.id))){
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
+        }
+
 
         oldReview.textShort=review.textShort;
         oldReview.textLong=review.textLong;
@@ -130,14 +133,17 @@ public class ReviewController extends Controller {
     @Secure(clients = "OidcClient")
     public Result remove(Long itemId, Long id){
         if(Item.find.byId(itemId)==null){
-            return notFound("Item Not Found "+itemId);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         Review review = Review.find.byId(id);
         if(review==null){
-            return notFound("Review Not Found "+review.id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         if(!Item.find.byId(itemId).equals(Item.find.byId(review.item.id))){
-            return notFound("Item Not Found: "+itemId+"/"+review.item.id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
+        }
+        if(Item.find.byId(itemId)==null){
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         if(!getUserProfile().get().getRoles().contains("ROLE_ADMIN")){
             if(!review.personId.equals(getUserProfile().get().getId())){

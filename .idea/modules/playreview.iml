@@ -183,7 +183,6 @@
     <orderEntry type="library" name="sbt: com.nimbusds:oauth2-oidc-sdk:6.5:jar" level="project" />
     <orderEntry type="library" name="sbt: com.nimbusds:nimbus-jose-jwt:6.0.2:jar" level="project" />
     <orderEntry type="library" name="sbt: com.nimbusds:lang-tag:1.4.3:jar" level="project" />
-    <orderEntry type="library" name="sbt: com.h2database:h2:1.4.199:jar" level="project" />
     <orderEntry type="library" name="sbt: com.googlecode.usc:jdbcdslog:1.0.6.2:jar" level="project" />
     <orderEntry type="library" name="sbt: com.google.j2objc:j2objc-annotations:1.1:jar" level="project" />
     <orderEntry type="library" name="sbt: com.google.inject.extensions:guice-assistedinject:4.2.2:jar" level="project" />
@@ -202,5 +201,6 @@
     <orderEntry type="library" name="sbt: com.fasterxml:classmate:1.3.4:jar" level="project" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-core:1.2.3:jar" level="project" />
     <orderEntry type="library" name="sbt: ch.qos.logback:logback-classic:1.2.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.h2database:h2:1.4.199:jar" level="project" />
   </component>
 </module>

@@ -8,6 +8,7 @@ import play.db.ebean.EbeanConfig;
 import javax.inject.Inject;
 import java.util.List;
 
+//Repository pro Review
 public class ReviewRepository {
 
     private final EbeanServer ebeanServer;

@@ -4,6 +4,7 @@ package controllers;
 import io.ebean.annotation.Transactional;
 import models.Item;
 import models.Review;
+import org.pac4j.core.context.HttpConstants;
 import org.pac4j.core.profile.CommonProfile;
 import org.pac4j.core.profile.ProfileManager;
 import org.pac4j.play.PlayWebContext;
@@ -14,6 +15,7 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Controller;
 import play.mvc.Result;
+import repository.DatabaseExecutionContext;
 import repository.ItemRepository;
 import repository.ReviewRepository;
 import views.html.items.*;
@@ -22,27 +24,26 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
-
+//Výpis 28, 29, 32, 38
+//Controller třída pro manipulaci s Item
 public class ItemsController extends Controller {
-
 
     private final FormFactory formFactory;
     private final ItemRepository itemRepository;
     private final ReviewRepository reviewRepository;
+    private DatabaseExecutionContext databaseExecutionContext;
 
 
     @Inject
-    public ItemsController(FormFactory formFactory, ItemRepository itemRepository, ReviewRepository reviewRepository){
+    public ItemsController(FormFactory formFactory, ItemRepository itemRepository, ReviewRepository reviewRepository, DatabaseExecutionContext databaseExecutionContext){
         this.formFactory=formFactory;
         this.itemRepository=itemRepository;
         this.reviewRepository=reviewRepository;
-
+        this.databaseExecutionContext=databaseExecutionContext;
     }
 
-
-
-
-    //for all items
+    //všechny položky
+    //Index akce pro návrat status 200 OK
     public Result index(){
         List<Item> items=Item.find.all();
         return ok(index.render(items, pac4jScalaTemplateHelper));
@@ -63,11 +64,10 @@ public class ItemsController extends Controller {
        return ok(index.render(items, pac4jScalaTemplateHelper));
     }
 
-    //creating item
+    //vytváření položky
     @Secure(clients = "OidcClient", authorizers = "admin")
     public Result create(){
         Form<Item> itemForm = formFactory.form(Item.class);
-
         return ok(create.render(itemForm, pac4jScalaTemplateHelper));
     }
     @Transactional
@@ -85,7 +85,7 @@ public class ItemsController extends Controller {
     public Result edit(Long id){
         Item item = Item.find.byId(id);
         if(item==null){
-            return notFound("Item Not Found");
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         Form<Item> itemForm = formFactory.form(Item.class).fill(item);
 
@@ -101,7 +101,7 @@ public class ItemsController extends Controller {
         Item item = itemForm.get();
         Item oldItem = Item.find.byId(id);
         if(oldItem == null){
-            return notFound("Item Not Found "+id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         oldItem.name=item.name;
         oldItem.author=item.author;
@@ -119,7 +119,7 @@ public class ItemsController extends Controller {
 
         Item item = Item.find.byId(id);
         if(item==null){
-            return notFound("Item Not Found "+item.id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         if(!reviewRepository.findByItemId(id).isEmpty()){
             for(Review review : reviewRepository.findByItemId(id)){
@@ -133,7 +133,7 @@ public class ItemsController extends Controller {
     public Result adminDetail(Long id){
         Item item = Item.find.byId(id);
         if(item==null){
-            return notFound("Item Not Found "+item.id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         return ok(adminDetail.render(item, pac4jScalaTemplateHelper));
     }
@@ -141,7 +141,7 @@ public class ItemsController extends Controller {
     public Result detail(Long id){
         Item item = Item.find.byId(id);
         if(item==null){
-            return notFound("Item Not Found "+item.id);
+            return notFound(views.html.error400.render().toString()).as((HttpConstants.HTML_CONTENT_TYPE));
         }
         return ok(detail.render(item, pac4jScalaTemplateHelper));
     }

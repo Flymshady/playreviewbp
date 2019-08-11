@@ -3,6 +3,8 @@
 # ~~~~
 
 # An example controller showing a sample home page
+
+# Výpis 30
 GET     /                           controllers.ItemsController.index
 
 GET     /callback                   @org.pac4j.play.CallbackController.callback()
@@ -14,7 +16,7 @@ GET     /login                      controllers.LoginController.login()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
-
+#items
 GET         /items                        controllers.ItemsController.index
 GET         /admin                        controllers.ItemsController.adminIndex
 GET         /admin/items                  controllers.ItemsController.adminIndex
@@ -25,10 +27,8 @@ GET         /admin/items/edit/:id         controllers.ItemsController.edit(id: L
 POST        /admin/items/edit             controllers.ItemsController.update(id: Long)
 POST        /admin/items/create           controllers.ItemsController.save()
 GET         /admin/items/remove/:id       controllers.ItemsController.remove(id: Long)
-
 GET         /items/genre/:genre           controllers.ItemsController.getByGenre(genre:String)
 GET         /admin/items/genre/:genre     controllers.ItemsController.adminGetByGenre(genre:String)
-
 
 #reviews
 GET     /items/:itemId/reviews               controllers.ReviewController.index(itemId: Long)

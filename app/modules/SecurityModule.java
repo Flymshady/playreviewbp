@@ -23,7 +23,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+//Výpis 34, 35, 36, 37
+//Třída pro konfiguraci zabezpečení
 public class SecurityModule extends AbstractModule {
     private final com.typesafe.config.Config configuration;
     private static class MyPac4jRoleHandler implements Pac4jRoleHandler {}
@@ -33,10 +34,10 @@ public class SecurityModule extends AbstractModule {
         this.configuration = configuration;
         this.baseUrl=configuration.getString("baseUrl");
     }
+
+    //Konfigurační metoda
     @Override
     protected void configure() {
-
-
         bind(Pac4jRoleHandler.class).to(MyPac4jRoleHandler.class);
         final PlayCacheSessionStore playCacheSessionStore = new PlayCacheSessionStore(getProvider(SyncCacheApi.class));
         bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);
@@ -56,16 +57,16 @@ public class SecurityModule extends AbstractModule {
         bind(LogoutController.class).toInstance(logoutController);
     }
 
-
+    //Metoda pro zpracování OIDC klienta
     @Provides
     protected OidcClient provideOidcClient() {
         final OidcConfiguration oidcConfiguration = new OidcConfiguration();
         oidcConfiguration.setClientId(configuration.getString("oidc.clientId"));
         oidcConfiguration.setSecret(configuration.getString("oidc.clientSecret"));
         oidcConfiguration.setDiscoveryURI(configuration.getString("oidc.discoveryUri"));
+
         final OidcClient oidcClient = new OidcClient(oidcConfiguration);
-      //  oidcClient.addAuthorizationGenerator((ctx, profile) -> { profile.addRole("ROLE_ADMIN"); return profile; });
-        oidcClient.addAuthorizationGenerator((ctx, profile) -> {
+         oidcClient.addAuthorizationGenerator((ctx, profile) -> {
             if (profile.getAttribute("groups") != null) {
                 List<String> groups = (List) profile.getAttribute("groups");
                 Set<String> filteredGroups = groups.stream()
@@ -78,6 +79,7 @@ public class SecurityModule extends AbstractModule {
         return oidcClient;
     }
 
+    //Metoda pro autorizaci
     @Provides
     protected Config provideConfig(OidcClient oidcClient) {
 
@@ -88,32 +90,5 @@ public class SecurityModule extends AbstractModule {
         config.setHttpActionAdapter(new SecureHttpActionAdapter());
         return config;
     }
-/*
 
-        bind(PlaySessionStore.class).to(PlayCacheSessionStore.class);
-        final OidcConfiguration oidcConfiguration = new OidcConfiguration();
-        oidcConfiguration.setDiscoveryURI(configuration.getString("oidc.discoveryUri"));
-        oidcConfiguration.setClientId(configuration.getString("oidc.clientId"));
-        oidcConfiguration.setSecret(configuration.getString("oidc.clientSecret"));
-        final OidcClient oidcClient = new OidcClient(oidcConfiguration);
-        oidcClient.addAuthorizationGenerator((ctx, profile) -> {
-            profile.addRole("ROLE_ADMIN");
-            return profile;
-        });
-        final String baseUrl = configuration.getString("baseUrl");
-        final Clients clients = new Clients(baseUrl + "/callback",  oidcClient);
-        final org.pac4j.core.config.Config config = new org.pac4j.core.config.Config(clients);
-        config.addAuthorizer("admin", new RequireAnyRoleAuthorizer<>("ROLE_ADMIN"));
-        config.setHttpActionAdapter(new SecureHttpActionAdapter());
-        bind(org.pac4j.core.config.Config.class).toInstance(config);
-
-        final CallbackController callbackController = new CallbackController();
-        callbackController.setDefaultUrl("/");
-        callbackController.setMultiProfile(true);
-        bind(CallbackController.class).toInstance(callbackController);
-
-        final LogoutController logoutController = new LogoutController();
-        logoutController.setDefaultUrl("/?defaulturlafterlogout");
-        bind(LogoutController.class).toInstance(logoutController);
-*/
 }

@@ -1,17 +1,14 @@
 package repository;
 
-import io.ebean.*;
+import io.ebean.Ebean;
+import io.ebean.EbeanServer;
 import models.Item;
 import play.db.ebean.EbeanConfig;
-
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static java.util.concurrent.CompletableFuture.supplyAsync;
-
-
+//Výpis 33
+//Repository pro Item
 public class ItemRepository {
 
     private final EbeanServer ebeanServer;
@@ -23,6 +20,7 @@ public class ItemRepository {
         this.executionContext=executionContext;
     }
 
+    //Metoda pro nalezení položek podle žánru
     public List<Item> getByGenre(String genre){
         List<Item> items = Ebean.find(Item.class)
                 .where()

@@ -6,6 +6,7 @@ import play.data.validation.Constraints;
 
 import javax.persistence.*;
 
+//Modelová třída s využitím Ebean
 @Entity
 public class Review extends Model {
 
@@ -20,6 +21,14 @@ public class Review extends Model {
     public String personId;
     @ManyToOne
     public Item item;
+
+    public Review(String textShort, String textLong, String personEmail, String personId, Item item){
+        this.textShort=textShort;
+        this.textLong=textLong;
+        this.personEmail=personEmail;
+        this.personId=personId;
+        this.item=item;
+    }
 
     public static Finder<Long, Review> find = new Finder<>(Review.class);
 }

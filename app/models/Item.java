@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//Výpis 31
+//Modelová třída s využitím Ebean
 @Entity
 public class Item extends Model {
 
@@ -31,7 +33,17 @@ public class Item extends Model {
 
     public static Finder<Long, Item> find = new Finder<>(Item.class);
 
+    public Item(){}
 
+    public Item(String name, String author, String genre, String typeformat, int year, String textShort, String textLong) {
+        this.name=name;
+        this.author=author;
+        this.genre=genre;
+        this.typeFormat=typeformat;
+        this.year=year;
+        this.textShort=textShort;
+        this.textLong=textLong;
+    }
 }
 
 

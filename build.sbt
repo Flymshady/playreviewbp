@@ -13,6 +13,8 @@ libraryDependencies += guice
 libraryDependencies += jdbc
 libraryDependencies += ehcache
 libraryDependencies += "com.h2database" % "h2" % "1.4.199"
+libraryDependencies += evolutions
+
 
 // To provide an implementation of JAXB-API, which is required by Ebean.
 libraryDependencies += "javax.xml.bind" % "jaxb-api" % "2.3.1"
